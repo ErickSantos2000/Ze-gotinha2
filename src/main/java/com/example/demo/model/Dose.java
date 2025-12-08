@@ -24,7 +24,7 @@ public class Dose {
     private Frasco frasco;
 
     public Dose() {
-        // Construtor padrão necessário para JPA
+
     }
 
     public Dose(String nome, Frasco frasco) {

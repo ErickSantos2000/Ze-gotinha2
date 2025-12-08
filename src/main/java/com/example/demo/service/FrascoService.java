@@ -28,6 +28,11 @@ public class FrascoService {
         }
         return frasco; // faz persistencia
     }
+
+    public void atualizarStatu(Frasco frasco){
+        frasco.setEmEstoque(false);
+        frascoRepository.save(frasco);
+    }
 }
 
 

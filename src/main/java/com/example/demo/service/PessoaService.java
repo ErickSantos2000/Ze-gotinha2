@@ -10,8 +10,12 @@ public class PessoaService {
     @Autowired
     private PessoasRepository pessoasRepository;
 
-    public Pessoa criarPessoa(String nome, String cpf, int idade,boolean vacinada){
+    public Pessoa criarPessoa(String nome, String cpf, int idade){
+        return pessoasRepository.save(new Pessoa(nome, cpf, idade)); // faz a pesistencia de dados
+    }
 
-        return pessoasRepository.save(new Pessoa(nome, cpf, idade, vacinada)); // faz a pesistencia de dados
+    public void atualizarStatus(Pessoa pessoa){
+        pessoa.setVacinada(true); // atualiza na memoria
+        pessoasRepository.save(pessoa); // atualiza no banco de dados
     }
 }

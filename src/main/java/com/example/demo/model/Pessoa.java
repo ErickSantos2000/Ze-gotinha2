@@ -18,10 +18,14 @@ public class Pessoa {
     private int idade;
     private boolean vacinada;
 
-    public Pessoa(String nome, String cpf, int idade, boolean vacinada){
+    public Pessoa(){
+
+    }
+
+    public Pessoa(String nome, String cpf, int idad){
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
-        this.vacinada = vacinada;
+        vacinada = false;
     }
 }

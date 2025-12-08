@@ -5,6 +5,7 @@ import com.example.demo.model.Dose;
 import com.example.demo.model.Frasco;
 import com.example.demo.model.Pessoa;
 
+import com.example.demo.repository.PessoasRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ import org.springframework.stereotype.Service;
         for (int i = 0; i < doses.size(); i++) {
             Dose dose = doses.get(i);
             if (!dose.getAplicada()) {
-                dose.setAplicada(true);
+                doseService.atualizarStatus(dose); // atuliaza o status de dose aplicada no banco e na memoria
                 doses.remove(i);
                 break;
             }
@@ -61,22 +62,24 @@ import org.springframework.stereotype.Service;
 
         if(!topo.getDosesDiponiveis().isEmpty()){ // verificar se o frasco contem doses
             this.aplicarDose(topo); // aplica vacina e remove apos isso
+            pessoaService.atualizarStatus(pessoaInicio); // atuliaza o status de vacinado no banco e na memoria
             System.out.println("Vacina aplicada em " + pessoaInicio.getNome() + "!");
             this.removerPessoaFIla(); // remove pessoa da fila
 
             if (topo.getDosesDiponiveis().isEmpty()){ // caso apos a aplicação o frasco estiver vazio, ele sera removido
+                frascoService.atualizarStatu(topo);
                 this.desimpilhaFrasco();
                 System.out.println("Frasco de " + topo.getNomeDose() + " esgotado. Removendo da pilha.");
             }
         }
     }
 
-    public void adicionarPessoaFila(String nome, String cpf, int idade, boolean vacinada){
+    public void adicionarPessoaFila(String nome, String cpf, int idade){
             if(fila.size() == 15){
                 System.out.println("Limite maximo de pessoas atigindos!");
             }
 
-            fila.add(pessoaService.criarPessoa(nome, cpf, idade, vacinada));
+            fila.add(pessoaService.criarPessoa(nome, cpf, idade));
     }
 
     public void removerPessoaFIla(){

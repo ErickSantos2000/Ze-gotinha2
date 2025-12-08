@@ -17,4 +17,9 @@ public class DoseService {
         return doseRepository.save(new Dose(nome, frasco));// faz persistencia
     }
 
+    public void atualizarStatus(Dose dose){
+        dose.setAplicada(true); // atualiza na memoria
+        doseRepository.save(dose); // atualiza no banco de dados
+    }
+
 }

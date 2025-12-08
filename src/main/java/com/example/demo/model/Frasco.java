@@ -19,14 +19,20 @@ public class Frasco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nomeDose;
+    private boolean emEstoque;
 
-    // reprenta 1:N, um frasco tem várias doses
+    // reprenta 1:N, um frasco tem varias doses
     @OneToMany(mappedBy = "frasco", orphanRemoval = true)
     private List<Dose> dosesDiponiveis;
+
+    public Frasco(){
+
+    }
 
     public Frasco(String nomeDose){
         this.nomeDose = nomeDose;
         this.dosesDiponiveis = new ArrayList<>();
+        emEstoque = true;
     }
 
 }

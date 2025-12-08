@@ -55,7 +55,7 @@ public class DemoApplication implements CommandLineRunner {
 						System.out.println("Idade inválida. Operação cancelada.");
 						break;
 					}
-					vacinaService.adicionarPessoaFila(nome, cpf, idade, false);
+					vacinaService.adicionarPessoaFila(nome, cpf, idade);
 					System.out.println("Pessoa " + nome + " adicionada à fila.");
 					break;
 				case 2:
